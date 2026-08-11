@@ -438,7 +438,7 @@
 
   /* ── CONFIG ── */
   var HS_PORTAL = '244862032';
-  var HS_FORM   = 'REPLACE_WITH_FORM_GUID';
+  var HS_FORM   = 'c8989759-617c-4855-8fca-55083b6059d4';
   var HS_REGION = 'na2';
 
   /* ── FEDERAL CONSTANTS (2024) ── */
@@ -877,8 +877,27 @@
            others; fall back to querying the container. */
         var formEl = (f && f.tagName) ? f : (f && f[0]) ? f[0] : el('hs-wrap').querySelector('form');
         if (!formEl || !cached) return;
+
         var vals = hsFieldValues(cached);
-        Object.keys(vals).forEach(function (k) { setHsField(formEl, k, vals[k]); });
+        var wrote = [], missing = [];
+        Object.keys(vals).forEach(function (k) {
+          (setHsField(formEl, k, vals[k]) ? wrote : missing).push(k);
+        });
+
+        /* A property absent from the form is silently dropped on submit, which
+           looks identical to a working integration until someone checks the
+           contact record weeks later. Say so loudly instead. */
+        if (missing.length && window.console) {
+          console.warn(
+            '[cost-calculator] ' + missing.length + ' of ' + Object.keys(vals).length +
+            ' fields are NOT on HubSpot form ' + HS_FORM + ' — these values will be discarded:\n  ' +
+            missing.join('\n  ') +
+            '\n\nAdd each as a Hidden field in the HubSpot form editor.' +
+            (wrote.length ? '\n\nCapturing correctly: ' + wrote.join(', ') : '')
+          );
+        } else if (window.console) {
+          console.info('[cost-calculator] all ' + wrote.length + ' fields captured ✓');
+        }
       },
 
       onFormSubmitted: function () {
