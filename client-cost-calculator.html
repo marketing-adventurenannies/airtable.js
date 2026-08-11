@@ -78,17 +78,20 @@
     .field-err { font-size: .8rem; color: var(--danger); display: none; }
 
     /* ── HIRE TYPE ── */
-    .hire-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    @media (max-width: 440px) { .hire-grid { grid-template-columns: 1fr; } }
-    .hire-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-    .hire-opt label {
-      display: flex; flex-direction: column; gap: 3px; padding: 14px 15px;
-      border: 2px solid var(--border); border-radius: var(--radius-sm);
-      cursor: pointer; transition: border-color .18s, background .18s; user-select: none;
+    select {
+      width: 100%; padding: 10px 12px;
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      font-size: 1rem; font-family: var(--font); color: var(--text); background: #fff;
+      transition: border-color .18s, box-shadow .18s; cursor: pointer;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23718096'%3E%3Cpath d='M4.5 6l3.5 3.5L11.5 6z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center; background-size: 16px;
+      padding-right: 32px;
     }
-    .hire-opt input:checked + label { border-color: var(--primary); background: var(--primary-bg); }
-    .hire-title { font-weight: 700; font-size: .9rem; color: var(--primary); }
-    .hire-fee   { font-size: .78rem; color: var(--muted); font-weight: 400; }
+    select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27,79,114,.12); }
+    optgroup { font-weight: 700; color: var(--primary); }
+    option   { font-weight: 400; color: var(--text); }
+    .hire-fee-note { font-size: .8rem; color: var(--primary); font-weight: 600; }
 
     /* ── ADVANCED ── */
     details { margin-bottom: 20px; }
@@ -215,23 +218,22 @@
     <form id="calc-form" novalidate>
 
       <div class="field">
-        <label>Type of Hire <span class="req">*</span></label>
-        <div class="hire-grid">
-          <div class="hire-opt">
-            <input type="radio" id="hire-nanny" name="hire-type" value="nanny" checked>
-            <label for="hire-nanny">
-              <span class="hire-title">🏠 Nanny / Standard</span>
-              <span class="hire-fee">Agency placement fee: 25% of gross salary</span>
-            </label>
-          </div>
-          <div class="hire-opt">
-            <input type="radio" id="hire-educator" name="hire-type" value="educator">
-            <label for="hire-educator">
-              <span class="hire-title">🎓 Private Educator / Specialized</span>
-              <span class="hire-fee">Agency placement fee: 30% of gross salary</span>
-            </label>
-          </div>
-        </div>
+        <label for="f-hire">Type of Search <span class="req">*</span></label>
+        <select id="f-hire">
+          <optgroup label="Standard Placement — 25% fee">
+            <option value="Long Term Nanny" selected>Long-Term Nanny</option>
+            <option value="Short Term Nanny (90-365 days)">Short-Term Nanny (90–365 days)</option>
+            <option value="Travel / Temporary Nanny">Temporary or Travel Nanny</option>
+            <option value="Household Manager">Household Manager</option>
+            <option value="Family Assistant">Family Assistant</option>
+          </optgroup>
+          <optgroup label="Specialized Search — 30% fee">
+            <option value="Private Educator">Private Educator</option>
+            <option value="Newborn Care Specialist">Newborn Care Specialist</option>
+            <option value="Rotational Nanny/Team">Rotational Nanny / Team</option>
+          </optgroup>
+        </select>
+        <span class="hire-fee-note" id="hire-fee-note"></span>
         <span class="field-err" id="err-hire"></span>
       </div>
 
@@ -408,8 +410,26 @@
     HubSpot → Marketing → Forms → [Your Form]
     → Actions → Share → Embed Code → formId value
 
-  The HubSpot form should collect:
-    First Name, Last Name, Email (required)
+  VISIBLE FORM FIELDS (required):
+    firstname, lastname, email
+
+  HIDDEN FORM FIELDS — add each to the form, set type to Hidden.
+  The calculator fills these in automatically before submit.
+
+    Already in your portal:
+      anticipated_hourly_rate   Anticipated Hourly Rate      (number)
+      search_type               Search Type                  (dropdown)
+      zip                       Postal Code                  (text)
+      state                     State/Region                 (text)
+      high_value_lead           High Value Lead              (checkbox)
+
+    Create these first (Settings → Properties → Create property,
+    object = Contact):
+      calc_hours_per_week       Calculator — Hours Per Week      (number)
+      calc_gross_annual_wages   Calculator — Gross Annual Wages  (number)
+      calc_agency_fee           Calculator — Estimated Agency Fee(number)
+      calc_first_year_total     Calculator — First-Year Total    (number)
+      calc_ongoing_annual       Calculator — Year 2+ Annual Cost (number)
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -->
 <script>
@@ -417,8 +437,9 @@
   'use strict';
 
   /* ── CONFIG ── */
-  var HS_PORTAL = 'REPLACE_WITH_PORTAL_ID';
+  var HS_PORTAL = '244862032';
   var HS_FORM   = 'REPLACE_WITH_FORM_GUID';
+  var HS_REGION = 'na2';
 
   /* ── FEDERAL CONSTANTS (2024) ── */
   var SS_BASE    = 168600;
@@ -427,10 +448,18 @@
   var FUTA_RATE  = 0.006;
   var FUTA_BASE  = 7000;
 
-  /* ── HIRE TYPES ── */
+  /* ── HIRE TYPES ──
+     Keys are the exact `search_type` values in HubSpot, so the selected
+     key writes straight through to the CRM with no translation layer. */
   var HIRE = {
-    nanny:    { label: 'Nanny / Standard',                  fee: 0.25 },
-    educator: { label: 'Private Educator / Specialized',    fee: 0.30 },
+    'Long Term Nanny':                { label: 'Long-Term Nanny',                fee: 0.25 },
+    'Short Term Nanny (90-365 days)': { label: 'Short-Term Nanny (90–365 days)', fee: 0.25 },
+    'Travel / Temporary Nanny':       { label: 'Temporary or Travel Nanny',      fee: 0.25 },
+    'Household Manager':              { label: 'Household Manager',              fee: 0.25 },
+    'Family Assistant':               { label: 'Family Assistant',               fee: 0.25 },
+    'Private Educator':               { label: 'Private Educator',               fee: 0.30 },
+    'Newborn Care Specialist':        { label: 'Newborn Care Specialist',        fee: 0.30 },
+    'Rotational Nanny/Team':          { label: 'Rotational Nanny / Team',        fee: 0.30 },
   };
 
   /* ── ZIP3 → STATE ── */
@@ -633,8 +662,8 @@
 
     ['err-hire','err-rate','err-hrs','err-zip'].forEach(clearErr);
 
-    if (!document.querySelector('input[name="hire-type"]:checked')) {
-      showErr('err-hire', 'Please select a hire type.'); ok = false;
+    if (!HIRE[el('f-hire').value]) {
+      showErr('err-hire', 'Please select a type of search.'); ok = false;
     }
     if (isNaN(rate) || rate < 35)  { showErr('err-rate', 'Minimum rate is $35.00/hr.');            ok = false; }
     else if (rate > 999)           { showErr('err-rate', 'Please enter a realistic rate (max $999).'); ok = false; }
@@ -801,13 +830,58 @@
     document.head.appendChild(s);
   }
 
+  /* Map calculated results onto HubSpot contact properties.
+     Keys are HubSpot internal property names. */
+  function hsFieldValues(res) {
+    return {
+      /* existing properties */
+      anticipated_hourly_rate: res.inp.rate,
+      search_type:             res.inp.hireType,
+      zip:                     res.inp.zip,
+      state:                   res.sd.n,
+      high_value_lead:         res.inp.rate > 45 ? 'true' : 'false',
+      /* new properties — see setup notes above */
+      calc_hours_per_week:     res.inp.hrs,
+      calc_gross_annual_wages: Math.round(res.gross),
+      calc_agency_fee:         Math.round(res.agencyFee),
+      calc_first_year_total:   Math.round(res.yr1),
+      calc_ongoing_annual:     Math.round(res.ongoing),
+    };
+  }
+
+  /* HubSpot's form fields are React-controlled: assigning .value directly is
+     silently discarded on submit. Go through the native setter, then fire the
+     events React listens for. */
+  function setHsField(formEl, name, value) {
+    var node = formEl.querySelector('[name="' + name + '"]');
+    if (!node) return false;
+    var proto  = node.tagName === 'SELECT' ? window.HTMLSelectElement : window.HTMLInputElement;
+    var setter = Object.getOwnPropertyDescriptor(proto.prototype, 'value');
+    if (setter && setter.set) { setter.set.call(node, value); }
+    else { node.value = value; }
+    node.dispatchEvent(new Event('input',  { bubbles: true }));
+    node.dispatchEvent(new Event('change', { bubbles: true }));
+    return true;
+  }
+
   function createHsForm() {
     el('hs-wrap').innerHTML = '';
     window.hbspt.forms.create({
       portalId: HS_PORTAL,
       formId:   HS_FORM,
+      region:   HS_REGION,
       target:   '#hs-wrap',
-      onFormSubmitted: function() {
+
+      onFormReady: function (f) {
+        /* v2 has handed back a jQuery object in some releases, a DOM node in
+           others; fall back to querying the container. */
+        var formEl = (f && f.tagName) ? f : (f && f[0]) ? f[0] : el('hs-wrap').querySelector('form');
+        if (!formEl || !cached) return;
+        var vals = hsFieldValues(cached);
+        Object.keys(vals).forEach(function (k) { setHsField(formEl, k, vals[k]); });
+      },
+
+      onFormSubmitted: function () {
         render(cached);
         show('results-section');
       },
@@ -816,6 +890,16 @@
 
   /* ── INIT ── */
   function init() {
+    /* Fee-tier live feedback */
+    function updateFeeNote() {
+      var ht = HIRE[el('f-hire').value];
+      el('hire-fee-note').textContent = ht
+        ? 'Placement fee: ' + Math.round(ht.fee * 100) + '% of gross annual salary'
+        : '';
+    }
+    el('f-hire').addEventListener('change', updateFeeNote);
+    updateFeeNote();
+
     /* ZIP live feedback */
     el('f-zip').addEventListener('input', function() {
       var v = this.value.replace(/\D/g,'').slice(0,5);
@@ -838,7 +922,7 @@
         hrs:      parseFloat(el('f-hrs').value),
         zip:      zip,
         sc:       stateOf(zip),
-        hireType: document.querySelector('input[name="hire-type"]:checked').value,
+        hireType: el('f-hire').value,
         pto:      parseFloat(el('f-pto').value)    || 2,
         sick:     parseFloat(el('f-sick').value)   || 5,
         health:   parseFloat(el('f-health').value) || 0,
