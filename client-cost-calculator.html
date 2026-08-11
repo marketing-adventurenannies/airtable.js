@@ -94,7 +94,7 @@
     details { margin-bottom: 20px; }
     summary { font-size: .875rem; font-weight: 600; color: var(--primary); cursor: pointer; user-select: none; padding: 10px 0; list-style: none; display: flex; align-items: center; gap: 6px; }
     summary::-webkit-details-marker { display: none; }
-    summary::before { content: '\25B8'; transition: transform .18s; display: inline-block; }
+    summary::before { content: '▸'; transition: transform .18s; display: inline-block; }
     details[open] summary::before { transform: rotate(90deg); }
     .adv-inner { border-top: 1px solid var(--border); padding-top: 16px; }
 
@@ -207,7 +207,7 @@
 
 <main id="app">
 
-  <!-- SECTION 1: INPUTS -->
+  <!-- ══ SECTION 1: INPUTS ══ -->
   <section id="calc-section" class="card">
     <h1 class="sec-title">Estimate Your Total Employer Cost</h1>
     <p class="sec-sub">Enter the candidate's hourly rate and your location to see a full annual cost breakdown — including taxes, benefits, and our placement fee.</p>
@@ -220,14 +220,14 @@
           <div class="hire-opt">
             <input type="radio" id="hire-nanny" name="hire-type" value="nanny" checked>
             <label for="hire-nanny">
-              <span class="hire-title">&#127968; Nanny / Standard</span>
+              <span class="hire-title">🏠 Nanny / Standard</span>
               <span class="hire-fee">Agency placement fee: 25% of gross salary</span>
             </label>
           </div>
           <div class="hire-opt">
             <input type="radio" id="hire-educator" name="hire-type" value="educator">
             <label for="hire-educator">
-              <span class="hire-title">&#127891; Private Educator / Specialized</span>
+              <span class="hire-title">🎓 Private Educator / Specialized</span>
               <span class="hire-fee">Agency placement fee: 30% of gross salary</span>
             </label>
           </div>
@@ -278,21 +278,21 @@
         </div>
       </details>
 
-      <button type="submit" class="btn-primary">Calculate My Costs &#8594;</button>
+      <button type="submit" class="btn-primary">Calculate My Costs →</button>
     </form>
   </section>
 
-  <!-- SECTION 2: HUBSPOT GATE -->
+  <!-- ══ SECTION 2: HUBSPOT GATE ══ -->
   <section id="gate-section" class="card" style="display:none">
-    <button class="gate-back" id="btn-back">&#8592; Edit my numbers</button>
+    <button class="gate-back" id="btn-back">← Edit my numbers</button>
     <h2 class="sec-title">Your estimate is ready!</h2>
     <p class="sec-sub">Enter your name and email to unlock your full cost breakdown. We'll also send you a copy for your records.</p>
     <div id="hs-wrap">
-      <div class="hs-loading">Loading form&#8230;</div>
+      <div class="hs-loading">Loading form…</div>
     </div>
   </section>
 
-  <!-- SECTION 3: RESULTS -->
+  <!-- ══ SECTION 3: RESULTS ══ -->
   <section id="results-section" class="card" style="display:none">
     <h2 class="sec-title">Your Estimated Employer Cost</h2>
     <p id="r-meta" style="font-size:.85rem;color:var(--muted);margin-bottom:20px;"></p>
@@ -302,17 +302,17 @@
       <div class="r-card emp">
         <div class="r-card-lbl">To Employee</div>
         <div class="r-card-amt" id="rc-emp"></div>
-        <div class="r-card-note">wages + benefits &middot; annual</div>
+        <div class="r-card-note">wages + benefits · annual</div>
       </div>
       <div class="r-card gov">
         <div class="r-card-lbl">To Government</div>
         <div class="r-card-amt" id="rc-gov"></div>
-        <div class="r-card-note">federal + state taxes &middot; annual</div>
+        <div class="r-card-note">federal + state taxes · annual</div>
       </div>
       <div class="r-card agn">
         <div class="r-card-lbl">To Agency</div>
         <div class="r-card-amt" id="rc-agn"></div>
-        <div class="r-card-note">placement fee &middot; one-time</div>
+        <div class="r-card-note">placement fee · one-time</div>
       </div>
     </div>
 
@@ -325,7 +325,7 @@
       <div class="total-box yr2">
         <div class="total-box-lbl">Year 2+ Annual Cost</div>
         <div class="total-box-amt" id="t-yr2"></div>
-        <div class="total-box-note">ongoing &middot; no agency fee</div>
+        <div class="total-box-note">ongoing · no agency fee</div>
       </div>
     </div>
 
@@ -338,7 +338,7 @@
     <div class="divider"></div>
     <p class="blk-label">Full Cost Breakdown</p>
 
-    <div class="section-badge badge-ongoing">&#128197; Ongoing Annual Costs</div>
+    <div class="section-badge badge-ongoing">📅 Ongoing Annual Costs</div>
     <table>
       <thead>
         <tr>
@@ -359,7 +359,7 @@
       </tfoot>
     </table>
 
-    <div class="section-badge badge-onetime">&#9873; One-Time Cost</div>
+    <div class="section-badge badge-onetime">⚑ One-Time Cost</div>
     <table>
       <tbody id="t-onetime"></tbody>
     </table>
@@ -385,48 +385,55 @@
     <div class="inputs-used" id="r-inputs"></div>
 
     <div class="disclaimer">
-      <strong>Disclaimer:</strong> This calculator provides estimates for informational purposes only and does not constitute legal, tax, or financial advice. Tax rates reflect 2024&#8211;2025 new-employer defaults and may differ based on your specific situation or changes in law. Workers&#8217; compensation rates are illustrative estimates; actual premiums vary by insurer and job classification. Social Security wage base is $168,600 (2024). FUTA rate (0.6%) assumes your state has not received a federal unemployment loan credit reduction. Agency fees reflect Adventure Nannies&#8217; standard placement fee structure. Please consult a licensed payroll provider or tax professional for precise obligations.
+      <strong>Disclaimer:</strong> This calculator provides estimates for informational purposes only and does not constitute legal, tax, or financial advice. Tax rates reflect 2024–2025 new-employer defaults and may differ based on your specific situation or changes in law. Workers' compensation rates are illustrative estimates; actual premiums vary by insurer and job classification. Social Security wage base is $168,600 (2024). FUTA rate (0.6%) assumes your state has not received a federal unemployment loan credit reduction. Agency fees reflect Adventure Nannies' standard placement fee structure. Please consult a licensed payroll provider or tax professional for precise obligations.
     </div>
 
     <div class="action-row">
-      <button class="btn-print" onclick="window.print()">&#128424; Print / Save PDF</button>
-      <button class="btn-sm" id="btn-restart">&#8617; Start Over</button>
+      <button class="btn-print" onclick="window.print()">🖨 Print / Save PDF</button>
+      <button class="btn-sm" id="btn-restart">↩ Start Over</button>
     </div>
   </section>
 
 </main>
 
 <!--
-  DEVELOPER SETUP: replace the two constants at the top of the script block below.
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DEVELOPER SETUP — replace the two constants below
 
-  HS_PORTAL: HubSpot portal ID
-    HubSpot -> Settings -> Account Setup
+  HUBSPOT_PORTAL_ID:
+    HubSpot → Settings → Account Setup
     (appears in your browser URL: /portal/XXXXXXXX)
 
-  HS_FORM: HubSpot form GUID
-    HubSpot -> Marketing -> Forms -> [Your Form]
-    -> Actions -> Share -> Embed Code -> formId value
+  HUBSPOT_FORM_ID:
+    HubSpot → Marketing → Forms → [Your Form]
+    → Actions → Share → Embed Code → formId value
 
-  The HubSpot form should collect: First Name, Last Name, Email (required)
+  The HubSpot form should collect:
+    First Name, Last Name, Email (required)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -->
 <script>
 (function () {
   'use strict';
 
+  /* ── CONFIG ── */
   var HS_PORTAL = 'REPLACE_WITH_PORTAL_ID';
   var HS_FORM   = 'REPLACE_WITH_FORM_GUID';
 
-  var SS_BASE   = 168600;
-  var SS_RATE   = 0.062;
-  var MED_RATE  = 0.0145;
-  var FUTA_RATE = 0.006;
-  var FUTA_BASE = 7000;
+  /* ── FEDERAL CONSTANTS (2024) ── */
+  var SS_BASE    = 168600;
+  var SS_RATE    = 0.062;
+  var MED_RATE   = 0.0145;
+  var FUTA_RATE  = 0.006;
+  var FUTA_BASE  = 7000;
 
+  /* ── HIRE TYPES ── */
   var HIRE = {
-    nanny:    { label: 'Nanny / Standard',               fee: 0.25 },
-    educator: { label: 'Private Educator / Specialized', fee: 0.30 },
+    nanny:    { label: 'Nanny / Standard',                  fee: 0.25 },
+    educator: { label: 'Private Educator / Specialized',    fee: 0.30 },
   };
 
+  /* ── ZIP3 → STATE ── */
   var Z = {
     '005':'MA','010':'MA','011':'MA','012':'MA','013':'MA','014':'MA','015':'MA','016':'MA','017':'MA','018':'MA','019':'MA',
     '020':'MA','021':'MA','022':'MA','023':'MA','024':'MA','025':'MA','026':'MA','027':'MA',
@@ -532,241 +539,334 @@
     '995':'AK','996':'AK','997':'AK','998':'AK','999':'AK',
   };
 
+  /* ── STATE TAX DATA (2024–2025 new-employer rates) ── */
   var ST = {
-    AL:{n:'Alabama',             sr:0.0270,sb: 8000,wc:0.0200},
-    AK:{n:'Alaska',              sr:0.0100,sb:47100,wc:0.0086},
-    AZ:{n:'Arizona',             sr:0.0200,sb: 8000,wc:0.0173},
-    AR:{n:'Arkansas',            sr:0.0310,sb:10000,wc:0.0154},
-    CA:{n:'California',          sr:0.0340,sb: 7000,wc:0.0220},
-    CO:{n:'Colorado',            sr:0.0170,sb:23800,wc:0.0156},
-    CT:{n:'Connecticut',         sr:0.0300,sb:25000,wc:0.0270},
-    DE:{n:'Delaware',            sr:0.0150,sb:10500,wc:0.0150},
-    DC:{n:'Washington D.C.',     sr:0.0270,sb: 9000,wc:0.0186},
-    FL:{n:'Florida',             sr:0.0270,sb: 7000,wc:0.0156},
-    GA:{n:'Georgia',             sr:0.0264,sb: 9500,wc:0.0126},
-    HI:{n:'Hawaii',              sr:0.0240,sb:56700,wc:0.0150},
-    ID:{n:'Idaho',               sr:0.0103,sb:53500,wc:0.0185},
-    IL:{n:'Illinois',            sr:0.0351,sb:13590,wc:0.0260},
-    IN:{n:'Indiana',             sr:0.0250,sb: 9500,wc:0.0110},
-    IA:{n:'Iowa',                sr:0.0100,sb:38200,wc:0.0170},
-    KS:{n:'Kansas',              sr:0.0270,sb:14000,wc:0.0150},
-    KY:{n:'Kentucky',            sr:0.0270,sb:11400,wc:0.0180},
-    LA:{n:'Louisiana',           sr:0.0188,sb: 7700,wc:0.0140},
-    ME:{n:'Maine',               sr:0.0220,sb:12000,wc:0.0196},
-    MD:{n:'Maryland',            sr:0.0230,sb: 8500,wc:0.0163},
-    MA:{n:'Massachusetts',       sr:0.0294,sb:15000,wc:0.0198},
-    MI:{n:'Michigan',            sr:0.0270,sb: 9500,wc:0.0175},
-    MN:{n:'Minnesota',           sr:0.0280,sb:42000,wc:0.0230},
-    MS:{n:'Mississippi',         sr:0.0100,sb:14000,wc:0.0160},
-    MO:{n:'Missouri',            sr:0.0220,sb:10500,wc:0.0150},
-    MT:{n:'Montana',             sr:0.0100,sb:43000,wc:0.0265},
-    NE:{n:'Nebraska',            sr:0.0125,sb: 9000,wc:0.0145},
-    NV:{n:'Nevada',              sr:0.0300,sb:40100,wc:0.0250},
-    NH:{n:'New Hampshire',       sr:0.0100,sb:14000,wc:0.0100},
-    NJ:{n:'New Jersey',          sr:0.0295,sb:42300,wc:0.0188},
-    NM:{n:'New Mexico',          sr:0.0100,sb:32400,wc:0.0152},
-    NY:{n:'New York',            sr:0.0341,sb:12800,wc:0.0185},
-    NC:{n:'North Carolina',      sr:0.0100,sb:31400,wc:0.0131},
-    ND:{n:'North Dakota',        sr:0.0110,sb:43800,wc:0.0130},
-    OH:{n:'Ohio',                sr:0.0270,sb: 9000,wc:0.0200},
-    OK:{n:'Oklahoma',            sr:0.0100,sb:27000,wc:0.0130},
-    OR:{n:'Oregon',              sr:0.0260,sb:52800,wc:0.0230},
-    PA:{n:'Pennsylvania',        sr:0.0387,sb:10000,wc:0.0210},
-    RI:{n:'Rhode Island',        sr:0.0190,sb:29200,wc:0.0148},
-    SC:{n:'South Carolina',      sr:0.0197,sb:14000,wc:0.0145},
-    SD:{n:'South Dakota',        sr:0.0120,sb:15000,wc:0.0152},
-    TN:{n:'Tennessee',           sr:0.0270,sb: 7000,wc:0.0120},
-    TX:{n:'Texas',               sr:0.0270,sb: 9000,wc:0.0163},
-    UT:{n:'Utah',                sr:0.0110,sb:47000,wc:0.0150},
-    VT:{n:'Vermont',             sr:0.0100,sb:14100,wc:0.0120},
-    VA:{n:'Virginia',            sr:0.0260,sb: 8000,wc:0.0137},
-    WA:{n:'Washington',          sr:0.0100,sb:68500,wc:0.0222},
-    WV:{n:'West Virginia',       sr:0.0270,sb: 9000,wc:0.0200},
-    WI:{n:'Wisconsin',           sr:0.0360,sb:14000,wc:0.0178},
-    WY:{n:'Wyoming',             sr:0.0270,sb:29100,wc:0.0080},
+    AL:{n:'Alabama',             sr:0.0270,sb: 8000, wc:0.0200},
+    AK:{n:'Alaska',              sr:0.0100,sb:47100, wc:0.0086},
+    AZ:{n:'Arizona',             sr:0.0200,sb: 8000, wc:0.0173},
+    AR:{n:'Arkansas',            sr:0.0310,sb:10000, wc:0.0154},
+    CA:{n:'California',          sr:0.0340,sb: 7000, wc:0.0220},
+    CO:{n:'Colorado',            sr:0.0170,sb:23800, wc:0.0156},
+    CT:{n:'Connecticut',         sr:0.0300,sb:25000, wc:0.0270},
+    DE:{n:'Delaware',            sr:0.0150,sb:10500, wc:0.0150},
+    DC:{n:'Washington D.C.',     sr:0.0270,sb: 9000, wc:0.0186},
+    FL:{n:'Florida',             sr:0.0270,sb: 7000, wc:0.0156},
+    GA:{n:'Georgia',             sr:0.0264,sb: 9500, wc:0.0126},
+    HI:{n:'Hawaii',              sr:0.0240,sb:56700, wc:0.0150},
+    ID:{n:'Idaho',               sr:0.0103,sb:53500, wc:0.0185},
+    IL:{n:'Illinois',            sr:0.0351,sb:13590, wc:0.0260},
+    IN:{n:'Indiana',             sr:0.0250,sb: 9500, wc:0.0110},
+    IA:{n:'Iowa',                sr:0.0100,sb:38200, wc:0.0170},
+    KS:{n:'Kansas',              sr:0.0270,sb:14000, wc:0.0150},
+    KY:{n:'Kentucky',            sr:0.0270,sb:11400, wc:0.0180},
+    LA:{n:'Louisiana',           sr:0.0188,sb: 7700, wc:0.0140},
+    ME:{n:'Maine',               sr:0.0220,sb:12000, wc:0.0196},
+    MD:{n:'Maryland',            sr:0.0230,sb: 8500, wc:0.0163},
+    MA:{n:'Massachusetts',       sr:0.0294,sb:15000, wc:0.0198},
+    MI:{n:'Michigan',            sr:0.0270,sb: 9500, wc:0.0175},
+    MN:{n:'Minnesota',           sr:0.0280,sb:42000, wc:0.0230},
+    MS:{n:'Mississippi',         sr:0.0100,sb:14000, wc:0.0160},
+    MO:{n:'Missouri',            sr:0.0220,sb:10500, wc:0.0150},
+    MT:{n:'Montana',             sr:0.0100,sb:43000, wc:0.0265},
+    NE:{n:'Nebraska',            sr:0.0125,sb: 9000, wc:0.0145},
+    NV:{n:'Nevada',              sr:0.0300,sb:40100, wc:0.0250},
+    NH:{n:'New Hampshire',       sr:0.0100,sb:14000, wc:0.0100},
+    NJ:{n:'New Jersey',          sr:0.0295,sb:42300, wc:0.0188},
+    NM:{n:'New Mexico',          sr:0.0100,sb:32400, wc:0.0152},
+    NY:{n:'New York',            sr:0.0341,sb:12800, wc:0.0185},
+    NC:{n:'North Carolina',      sr:0.0100,sb:31400, wc:0.0131},
+    ND:{n:'North Dakota',        sr:0.0110,sb:43800, wc:0.0130},
+    OH:{n:'Ohio',                sr:0.0270,sb: 9000, wc:0.0200},
+    OK:{n:'Oklahoma',            sr:0.0100,sb:27000, wc:0.0130},
+    OR:{n:'Oregon',              sr:0.0260,sb:52800, wc:0.0230},
+    PA:{n:'Pennsylvania',        sr:0.0387,sb:10000, wc:0.0210},
+    RI:{n:'Rhode Island',        sr:0.0190,sb:29200, wc:0.0148},
+    SC:{n:'South Carolina',      sr:0.0197,sb:14000, wc:0.0145},
+    SD:{n:'South Dakota',        sr:0.0120,sb:15000, wc:0.0152},
+    TN:{n:'Tennessee',           sr:0.0270,sb: 7000, wc:0.0120},
+    TX:{n:'Texas',               sr:0.0270,sb: 9000, wc:0.0163},
+    UT:{n:'Utah',                sr:0.0110,sb:47000, wc:0.0150},
+    VT:{n:'Vermont',             sr:0.0100,sb:14100, wc:0.0120},
+    VA:{n:'Virginia',            sr:0.0260,sb: 8000, wc:0.0137},
+    WA:{n:'Washington',          sr:0.0100,sb:68500, wc:0.0222},
+    WV:{n:'West Virginia',       sr:0.0270,sb: 9000, wc:0.0200},
+    WI:{n:'Wisconsin',           sr:0.0360,sb:14000, wc:0.0178},
+    WY:{n:'Wyoming',             sr:0.0270,sb:29100, wc:0.0080},
   };
 
-  var cached  = null;
+  /* ── STATE ── */
+  var cached = null;
   var hsLoaded = false;
 
+  /* ── UTILS ── */
   function el(id) { return document.getElementById(id); }
   function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
-  function pctStr(n,t) { return t>0 ? ((n/t)*100).toFixed(1)+'%' : '—'; }
-  function stateOf(zip) { return Z[zip.substring(0,3)] || null; }
-  function cap(s) { return s.charAt(0).toUpperCase()+s.slice(1); }
+  function pctStr(n, total) { return total > 0 ? ((n / total) * 100).toFixed(1) + '%' : '—'; }
+  function stateOf(zip) { return Z[zip.substring(0, 3)] || null; }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function showErr(id,msg){var e=el(id);e.textContent=msg;e.style.display='block';}
-  function clearErr(id){var e=el(id);e.textContent='';e.style.display='none';}
+
+  function showErr(id, msg) { var e = el(id); e.textContent = msg; e.style.display = 'block'; }
+  function clearErr(id)     { var e = el(id); e.textContent = '';  e.style.display = 'none';  }
 
   function show(id) {
-    ['calc-section','gate-section','results-section'].forEach(function(s){
-      var node=el(s);
-      if(s===id){
-        node.style.display='block';
+    ['calc-section','gate-section','results-section'].forEach(function(s) {
+      var node = el(s);
+      if (s === id) {
+        node.style.display = 'block';
         node.classList.remove('fade-in');
         void node.offsetWidth;
         node.classList.add('fade-in');
-        window.scrollTo({top:0,behavior:'smooth'});
-      } else { node.style.display='none'; }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        node.style.display = 'none';
+      }
     });
   }
 
+  /* ── VALIDATE ── */
   function validate() {
-    var ok=true;
-    var rate=parseFloat(el('f-rate').value);
-    var hrs=parseFloat(el('f-hrs').value);
-    var zip=el('f-zip').value.trim();
+    var ok   = true;
+    var rate = parseFloat(el('f-rate').value);
+    var hrs  = parseFloat(el('f-hrs').value);
+    var zip  = el('f-zip').value.trim();
+
     ['err-hire','err-rate','err-hrs','err-zip'].forEach(clearErr);
-    if(!document.querySelector('input[name="hire-type"]:checked')){showErr('err-hire','Please select a hire type.');ok=false;}
-    if(isNaN(rate)||rate<35){showErr('err-rate','Minimum rate is $35.00/hr.');ok=false;}
-    else if(rate>999){showErr('err-rate','Please enter a realistic rate (max $999).');ok=false;}
-    if(isNaN(hrs)||hrs<1){showErr('err-hrs','Please enter at least 1 hour per week.');ok=false;}
-    else if(hrs>168){showErr('err-hrs','Hours per week cannot exceed 168.');ok=false;}
-    if(!/^\d{5}$/.test(zip)){showErr('err-zip','Enter a valid 5-digit ZIP code.');ok=false;}
-    else if(!stateOf(zip)){showErr('err-zip','Could not identify state from that ZIP — please verify.');ok=false;}
+
+    if (!document.querySelector('input[name="hire-type"]:checked')) {
+      showErr('err-hire', 'Please select a hire type.'); ok = false;
+    }
+    if (isNaN(rate) || rate < 35)  { showErr('err-rate', 'Minimum rate is $35.00/hr.');            ok = false; }
+    else if (rate > 999)           { showErr('err-rate', 'Please enter a realistic rate (max $999).'); ok = false; }
+    if (isNaN(hrs) || hrs < 1)    { showErr('err-hrs',  'Please enter at least 1 hour per week.'); ok = false; }
+    else if (hrs > 168)            { showErr('err-hrs',  'Hours per week cannot exceed 168.');       ok = false; }
+    if (!/^\d{5}$/.test(zip))     { showErr('err-zip',  'Enter a valid 5-digit ZIP code.');         ok = false; }
+    else if (!stateOf(zip))        { showErr('err-zip',  "Couldn't identify state from that ZIP — please verify."); ok = false; }
+
     return ok;
   }
 
+  /* ── CALCULATE ── */
   function calc(inp) {
-    var r=inp.rate, h=inp.hrs, sd=ST[inp.sc], ht=HIRE[inp.hireType];
-    var gross=r*h*52;
-    var ptoVal=r*h*inp.pto;
-    var sickVal=r*(h/5)*inp.sick;
-    var hlthYear=inp.health*12;
-    var ssTax=Math.min(gross,SS_BASE)*SS_RATE;
-    var medTax=gross*MED_RATE;
-    var futaTax=Math.min(gross,FUTA_BASE)*FUTA_RATE;
-    var sutaTax=Math.min(gross,sd.sb)*sd.sr;
-    var wcTax=gross*sd.wc;
-    var agencyFee=gross*ht.fee;
-    var toEmp=gross+hlthYear;
-    var toGov=ssTax+medTax+futaTax+sutaTax+wcTax;
-    var ongoing=toEmp+toGov;
-    var yr1=ongoing+agencyFee;
-    var rows=[
-      {lbl:'Gross Annual Wages',                                                                   amt:gross,   rec:'employee',   cat:'wages'},
-      {lbl:'Annual Health Stipend',                                                                amt:hlthYear,rec:'employee',   cat:'benefit'},
-      {lbl:'Social Security (6.2%)',                                                               amt:ssTax,   rec:'government', cat:'federal'},
-      {lbl:'Medicare (1.45%)',                                                                     amt:medTax,  rec:'government', cat:'federal'},
-      {lbl:'Federal Unemployment / FUTA (0.6% on first $'+FUTA_BASE.toLocaleString()+')',         amt:futaTax, rec:'government', cat:'federal'},
-      {lbl:sd.n+' State Unemployment / SUTA ('+(sd.sr*100).toFixed(2)+'%)',                       amt:sutaTax, rec:'government', cat:'state'},
-      {lbl:sd.n+" Workers' Comp (est. "+(sd.wc*100).toFixed(2)+'%)',                              amt:wcTax,   rec:'government', cat:'state'},
+    var r  = inp.rate;
+    var h  = inp.hrs;
+    var sd = ST[inp.sc];
+    var ht = HIRE[inp.hireType];
+
+    var gross     = r * h * 52;
+    var ptoVal    = r * h * inp.pto;
+    var sickVal   = r * (h / 5) * inp.sick;
+    var hlthYear  = inp.health * 12;
+
+    var ssTax     = Math.min(gross, SS_BASE)   * SS_RATE;
+    var medTax    = gross                       * MED_RATE;
+    var futaTax   = Math.min(gross, FUTA_BASE) * FUTA_RATE;
+    var sutaTax   = Math.min(gross, sd.sb)     * sd.sr;
+    var wcTax     = gross * sd.wc;
+
+    var agencyFee = gross * ht.fee;
+    var toEmp     = gross + hlthYear;
+    var toGov     = ssTax + medTax + futaTax + sutaTax + wcTax;
+    var ongoing   = toEmp + toGov;
+    var yr1       = ongoing + agencyFee;
+
+    var rows = [
+      { lbl: 'Gross Annual Wages',                                                     amt: gross,    rec: 'employee',   cat: 'wages'   },
+      { lbl: 'Annual Health Stipend',                                                  amt: hlthYear, rec: 'employee',   cat: 'benefit' },
+      { lbl: 'Social Security (6.2%)',                                                 amt: ssTax,    rec: 'government', cat: 'federal' },
+      { lbl: 'Medicare (1.45%)',                                                       amt: medTax,   rec: 'government', cat: 'federal' },
+      { lbl: 'Federal Unemployment / FUTA (0.6% on first $' + FUTA_BASE.toLocaleString() + ')', amt: futaTax, rec: 'government', cat: 'federal' },
+      { lbl: sd.n + ' State Unemployment / SUTA (' + (sd.sr*100).toFixed(2) + '%)',   amt: sutaTax,  rec: 'government', cat: 'state'   },
+      { lbl: sd.n + " Workers' Comp (est. " + (sd.wc*100).toFixed(2) + '%)',          amt: wcTax,    rec: 'government', cat: 'state'   },
     ];
-    var oneTime=[
-      {lbl:'Agency Placement Fee — '+ht.label+' ('+Math.round(ht.fee*100)+'% of gross salary)',
-       amt:agencyFee,rec:'agency',cat:'agency'},
+
+    var oneTime = [
+      { lbl: 'Agency Placement Fee — ' + ht.label + ' (' + Math.round(ht.fee * 100) + '% of gross salary)',
+        amt: agencyFee, rec: 'agency', cat: 'agency' },
     ];
-    return {sd:sd,ht:ht,gross:gross,ptoVal:ptoVal,sickVal:sickVal,hlthYear:hlthYear,
-      toEmp:toEmp,toGov:toGov,agencyFee:agencyFee,ongoing:ongoing,yr1:yr1,
-      rows:rows,oneTime:oneTime,inp:inp};
+
+    return { sd: sd, ht: ht, gross: gross, ptoVal: ptoVal, sickVal: sickVal, hlthYear: hlthYear,
+      toEmp: toEmp, toGov: toGov, agencyFee: agencyFee, ongoing: ongoing, yr1: yr1,
+      rows: rows, oneTime: oneTime, inp: inp };
   }
 
+  /* ── RENDER ── */
   function render(res) {
-    el('rc-emp').textContent=fmt(res.toEmp);
-    el('rc-gov').textContent=fmt(res.toGov);
-    el('rc-agn').textContent=fmt(res.agencyFee);
-    el('t-yr1').textContent=fmt(res.yr1);
-    el('t-yr2').textContent=fmt(res.ongoing);
-    el('r-meta').textContent=res.sd.n+'  ·  '+res.ht.label+'  ·  $'+res.inp.rate+'/hr × '+res.inp.hrs+' hrs/wk';
-    var tb=el('t-ongoing'); tb.innerHTML='';
-    res.rows.forEach(function(row){
-      if(row.amt===0) return;
-      var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+esc(row.lbl)+'</td><td class="r">'+fmt(row.amt)+'</td><td class="r">'+pctStr(row.amt,res.yr1)+'</td><td><span class="pill '+row.rec+'">'+cap(row.rec)+'</span></td>';
+    el('rc-emp').textContent = fmt(res.toEmp);
+    el('rc-gov').textContent = fmt(res.toGov);
+    el('rc-agn').textContent = fmt(res.agencyFee);
+    el('t-yr1').textContent  = fmt(res.yr1);
+    el('t-yr2').textContent  = fmt(res.ongoing);
+    el('r-meta').textContent = res.sd.n + '  ·  ' + res.ht.label
+      + '  ·  $' + res.inp.rate + '/hr × ' + res.inp.hrs + ' hrs/wk';
+
+    /* Ongoing table */
+    var tb = el('t-ongoing');
+    tb.innerHTML = '';
+    res.rows.forEach(function (row) {
+      if (row.amt === 0) return;
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + esc(row.lbl) + '</td>'
+        + '<td class="r">' + fmt(row.amt) + '</td>'
+        + '<td class="r">' + pctStr(row.amt, res.yr1) + '</td>'
+        + '<td><span class="pill ' + row.rec + '">' + cap(row.rec) + '</span></td>';
       tb.appendChild(tr);
     });
-    el('t-ongoing-sub').textContent=fmt(res.ongoing);
-    el('t-ongoing-pct').textContent=pctStr(res.ongoing,res.yr1);
-    var otb=el('t-onetime'); otb.innerHTML='';
-    res.oneTime.forEach(function(row){
-      var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+esc(row.lbl)+'<span class="ot-badge">ONE-TIME</span></td><td class="r">'+fmt(row.amt)+'</td><td class="r">'+pctStr(row.amt,res.yr1)+'</td><td><span class="pill '+row.rec+'">'+cap(row.rec)+'</span></td>';
+    el('t-ongoing-sub').textContent = fmt(res.ongoing);
+    el('t-ongoing-pct').textContent = pctStr(res.ongoing, res.yr1);
+
+    /* One-time table */
+    var otb = el('t-onetime');
+    otb.innerHTML = '';
+    res.oneTime.forEach(function (row) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + esc(row.lbl) + '<span class="ot-badge">ONE-TIME</span></td>'
+        + '<td class="r">' + fmt(row.amt) + '</td>'
+        + '<td class="r">' + pctStr(row.amt, res.yr1) + '</td>'
+        + '<td><span class="pill ' + row.rec + '">' + cap(row.rec) + '</span></td>';
       otb.appendChild(tr);
     });
-    el('t-grand').textContent=fmt(res.yr1);
-    el('b-pto').textContent=fmt(res.ptoVal);
-    el('b-sick').textContent=fmt(res.sickVal);
-    el('b-health').textContent=fmt(res.hlthYear);
-    el('r-inputs').innerHTML='<strong>Inputs used:</strong> $'+res.inp.rate+'/hr &bull; '+res.inp.hrs+' hrs/wk &bull; ZIP '+res.inp.zip+' ('+res.sd.n+') &bull; '+res.inp.pto+' PTO wks &bull; '+res.inp.sick+' sick days &bull; $'+res.inp.health+'/mo health &bull; '+res.ht.label;
+
+    el('t-grand').textContent = fmt(res.yr1);
+
+    /* Benefits */
+    el('b-pto').textContent    = fmt(res.ptoVal);
+    el('b-sick').textContent   = fmt(res.sickVal);
+    el('b-health').textContent = fmt(res.hlthYear);
+
+    /* Inputs audit */
+    el('r-inputs').innerHTML = '<strong>Inputs used:</strong> '
+      + '$' + res.inp.rate + '/hr &bull; ' + res.inp.hrs + ' hrs/wk &bull; '
+      + 'ZIP ' + res.inp.zip + ' (' + res.sd.n + ') &bull; '
+      + res.inp.pto + ' PTO wks &bull; ' + res.inp.sick + ' sick days &bull; '
+      + '$' + res.inp.health + '/mo health &bull; ' + res.ht.label;
+
+    /* Chart */
     drawChart(res);
   }
 
+  /* ── SVG CHART ── */
   function drawChart(res) {
-    var COLORS={wages:'#1B4F72',benefit:'#1E8449',federal:'#E67E22',state:'#CA6F1E',agency:'#7D3C98'};
-    var allRows=res.rows.concat(res.oneTime).filter(function(r){return r.amt>0;});
-    var LW=230,BW=320,AW=82,PAD=14;
-    var TW=LW+BW+AW+PAD, BAR=24, GAP=8;
-    var TH=allRows.length*(BAR+GAP)+10;
-    var svg=el('cost-svg'), NS='http://www.w3.org/2000/svg';
-    svg.innerHTML='';
-    svg.setAttribute('viewBox','0 0 '+TW+' '+TH);
-    svg.setAttribute('height',TH);
-    allRows.forEach(function(row,i){
-      var y=i*(BAR+GAP)+4, bw=Math.max(3,(row.amt/res.yr1)*BW);
-      var col=COLORS[row.cat]||'#aaa';
-      var lbl=row.lbl.length>36?row.lbl.substring(0,34)+'…':row.lbl;
-      var t=document.createElementNS(NS,'text');
-      t.setAttribute('x',LW-6);t.setAttribute('y',y+BAR/2+4);
-      t.setAttribute('text-anchor','end');t.setAttribute('font-size','11.5');
-      t.setAttribute('fill','#4A5568');t.setAttribute('font-family','Segoe UI,system-ui,sans-serif');
-      t.textContent=lbl; svg.appendChild(t);
-      var rect=document.createElementNS(NS,'rect');
-      rect.setAttribute('x',LW);rect.setAttribute('y',y);
-      rect.setAttribute('width',bw);rect.setAttribute('height',BAR);
-      rect.setAttribute('fill',col);rect.setAttribute('rx','4');
+    var COLORS = { wages:'#1B4F72', benefit:'#1E8449', federal:'#E67E22', state:'#CA6F1E', agency:'#7D3C98' };
+    var allRows = res.rows.concat(res.oneTime).filter(function(r){ return r.amt > 0; });
+    var LW = 230, BW = 320, AW = 82, PAD = 14;
+    var TW = LW + BW + AW + PAD;
+    var BAR = 24, GAP = 8;
+    var TH = allRows.length * (BAR + GAP) + 10;
+    var svg = el('cost-svg');
+    var NS  = 'http://www.w3.org/2000/svg';
+    svg.innerHTML = '';
+    svg.setAttribute('viewBox', '0 0 ' + TW + ' ' + TH);
+    svg.setAttribute('height', TH);
+
+    allRows.forEach(function(row, i) {
+      var y    = i * (BAR + GAP) + 4;
+      var bw   = Math.max(3, (row.amt / res.yr1) * BW);
+      var col  = COLORS[row.cat] || '#aaa';
+      var lbl  = row.lbl.length > 36 ? row.lbl.substring(0, 34) + '…' : row.lbl;
+
+      var t = document.createElementNS(NS, 'text');
+      t.setAttribute('x', LW - 6); t.setAttribute('y', y + BAR / 2 + 4);
+      t.setAttribute('text-anchor', 'end'); t.setAttribute('font-size', '11.5');
+      t.setAttribute('fill', '#4A5568'); t.setAttribute('font-family', 'Segoe UI,system-ui,sans-serif');
+      t.textContent = lbl;
+      svg.appendChild(t);
+
+      var rect = document.createElementNS(NS, 'rect');
+      rect.setAttribute('x', LW); rect.setAttribute('y', y);
+      rect.setAttribute('width', bw); rect.setAttribute('height', BAR);
+      rect.setAttribute('fill', col); rect.setAttribute('rx', '4');
       svg.appendChild(rect);
-      var v=document.createElementNS(NS,'text');
-      v.setAttribute('x',LW+bw+5);v.setAttribute('y',y+BAR/2+4);
-      v.setAttribute('font-size','11');v.setAttribute('fill','#2D3748');
-      v.setAttribute('font-weight','600');v.setAttribute('font-family','Segoe UI,system-ui,sans-serif');
-      v.textContent=fmt(row.amt); svg.appendChild(v);
+
+      var v = document.createElementNS(NS, 'text');
+      v.setAttribute('x', LW + bw + 5); v.setAttribute('y', y + BAR / 2 + 4);
+      v.setAttribute('font-size', '11'); v.setAttribute('fill', '#2D3748');
+      v.setAttribute('font-weight', '600'); v.setAttribute('font-family', 'Segoe UI,system-ui,sans-serif');
+      v.textContent = fmt(row.amt);
+      svg.appendChild(v);
     });
   }
 
+  /* ── HUBSPOT ── */
   function loadHsForm() {
-    el('hs-wrap').innerHTML='<div class="hs-loading">Loading form…</div>';
-    if(hsLoaded&&window.hbspt){createHsForm();return;}
-    var s=document.createElement('script');
-    s.src='//js.hsforms.net/forms/embed/v2.js'; s.charset='utf-8';
-    s.onload=function(){hsLoaded=true;createHsForm();};
-    s.onerror=function(){el('hs-wrap').innerHTML='<p class="hs-err">The form could not load. Please <a href="mailto:info@adventurenannies.com">email us</a> to receive your estimate.</p>';};
+    el('hs-wrap').innerHTML = '<div class="hs-loading">Loading form…</div>';
+    if (hsLoaded && window.hbspt) { createHsForm(); return; }
+    var s = document.createElement('script');
+    s.src = '//js.hsforms.net/forms/embed/v2.js';
+    s.charset = 'utf-8';
+    s.onload  = function() { hsLoaded = true; createHsForm(); };
+    s.onerror = function() {
+      el('hs-wrap').innerHTML = '<p class="hs-err">The form couldn\'t load. Please <a href="mailto:info@adventurenannies.com">email us</a> to receive your estimate.</p>';
+    };
     document.head.appendChild(s);
   }
 
   function createHsForm() {
-    el('hs-wrap').innerHTML='';
+    el('hs-wrap').innerHTML = '';
     window.hbspt.forms.create({
-      portalId:HS_PORTAL, formId:HS_FORM, target:'#hs-wrap',
-      onFormSubmitted:function(){render(cached);show('results-section');},
+      portalId: HS_PORTAL,
+      formId:   HS_FORM,
+      target:   '#hs-wrap',
+      onFormSubmitted: function() {
+        render(cached);
+        show('results-section');
+      },
     });
   }
 
+  /* ── INIT ── */
   function init() {
-    el('f-zip').addEventListener('input',function(){
-      var v=this.value.replace(/\D/g,'').slice(0,5); this.value=v;
-      var ok=el('state-ok');
-      if(v.length>=3){var sc=stateOf(v); if(sc&&ST[sc]){ok.textContent='✓ '+ST[sc].n;ok.style.display='block';}else{ok.style.display='none';}}
-      else{ok.style.display='none';}
+    /* ZIP live feedback */
+    el('f-zip').addEventListener('input', function() {
+      var v = this.value.replace(/\D/g,'').slice(0,5);
+      this.value = v;
+      var ok = el('state-ok');
+      if (v.length >= 3) {
+        var sc = stateOf(v);
+        if (sc && ST[sc]) { ok.textContent = '✓ ' + ST[sc].n; ok.style.display = 'block'; }
+        else { ok.style.display = 'none'; }
+      } else { ok.style.display = 'none'; }
     });
-    el('calc-form').addEventListener('submit',function(e){
-      e.preventDefault(); if(!validate()) return;
-      var zip=el('f-zip').value.trim();
-      cached=calc({rate:parseFloat(el('f-rate').value),hrs:parseFloat(el('f-hrs').value),
-        zip:zip,sc:stateOf(zip),hireType:document.querySelector('input[name="hire-type"]:checked').value,
-        pto:parseFloat(el('f-pto').value)||2,sick:parseFloat(el('f-sick').value)||5,
-        health:parseFloat(el('f-health').value)||0});
-      show('gate-section'); loadHsForm();
+
+    /* Form submit */
+    el('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!validate()) return;
+      var zip = el('f-zip').value.trim();
+      cached = calc({
+        rate:     parseFloat(el('f-rate').value),
+        hrs:      parseFloat(el('f-hrs').value),
+        zip:      zip,
+        sc:       stateOf(zip),
+        hireType: document.querySelector('input[name="hire-type"]:checked').value,
+        pto:      parseFloat(el('f-pto').value)    || 2,
+        sick:     parseFloat(el('f-sick').value)   || 5,
+        health:   parseFloat(el('f-health').value) || 0,
+      });
+      show('gate-section');
+      loadHsForm();
     });
-    el('btn-back').addEventListener('click',function(){el('hs-wrap').innerHTML='';show('calc-section');});
-    el('btn-restart').addEventListener('click',function(){
-      cached=null;el('hs-wrap').innerHTML='';el('state-ok').style.display='none';
+
+    /* Back */
+    el('btn-back').addEventListener('click', function() {
+      el('hs-wrap').innerHTML = '';
+      show('calc-section');
+    });
+
+    /* Start over */
+    el('btn-restart').addEventListener('click', function() {
+      cached = null;
+      el('hs-wrap').innerHTML = '';
+      el('state-ok').style.display = 'none';
       ['err-hire','err-rate','err-hrs','err-zip'].forEach(clearErr);
       show('calc-section');
     });
+
     show('calc-section');
   }
 
-  document.addEventListener('DOMContentLoaded',init);
+  document.addEventListener('DOMContentLoaded', init);
+
 })();
 </script>
 </body>
